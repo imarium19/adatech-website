@@ -577,7 +577,7 @@
         </header>
 
         <div class="color-control-video-grid">
-          <div class="color-control-video-card" data-video-src="assets/videos/what_is_g7.mp4" role="button" tabindex="0">
+          <div class="color-control-video-card" data-video-embed="https://www.youtube.com/embed/BDNZTc6vRDQ" role="button" tabindex="0">
             <div class="color-control-video-thumb">
               <img src="assets/thumbnails/thumbnail1.jpg" alt="What is G7" />
               <span class="color-control-play-icon" aria-hidden="true">▶</span>
@@ -585,7 +585,7 @@
             <h3 class="color-control-video-title">What is G7</h3>
             <p class="color-control-video-desc">Understanding the methodology behind neutral gray balance and print standardization.</p>
           </div>
-          <div class="color-control-video-card" data-video-src="assets/videos/g7_wide_format_printers.mp4" role="button" tabindex="0">
+          <div class="color-control-video-card" data-video-embed="https://www.youtube.com/embed/toau0kSnu0Q" role="button" tabindex="0">
             <div class="color-control-video-thumb">
               <img src="assets/thumbnails/thumbnail2.png" alt="G7 for Wide Format Printers" />
               <span class="color-control-play-icon" aria-hidden="true">▶</span>
@@ -593,7 +593,7 @@
             <h3 class="color-control-video-title">G7 for Wide Format Printers</h3>
             <p class="color-control-video-desc">Applying G7 principles to scalable and large-format production workflows.</p>
           </div>
-          <div class="color-control-video-card" data-video-src="assets/videos/spectrodens.mp4" role="button" tabindex="0">
+          <div class="color-control-video-card" data-video-embed="https://www.youtube.com/embed/dWSOQUYAiPI" role="button" tabindex="0">
             <div class="color-control-video-thumb">
               <img src="assets/thumbnails/thumbnail3.jpg" alt="SpectroDens Instrumentation" />
               <span class="color-control-play-icon" aria-hidden="true">▶</span>
@@ -610,9 +610,14 @@
       <div class="video-modal-backdrop"></div>
       <div class="video-modal-content">
         <button type="button" class="video-modal-close" aria-label="Close">×</button>
-        <video id="video-modal-player" controls preload="metadata">
-          <source src="" type="video/mp4" />
-        </video>
+        <iframe
+          id="video-modal-player"
+          src=""
+          title="AdaSphere video player"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
       </div>
     </div>
 

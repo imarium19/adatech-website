@@ -1474,9 +1474,11 @@ a.workflow-item-name:hover {
   background-color: var(--color-surface);
 }
 
-.video-modal-content video {
+.video-modal-content iframe {
   width: 100%;
+  aspect-ratio: 16 / 9;
   display: block;
+  border: 0;
 }
 
 /* Certificate lightbox */

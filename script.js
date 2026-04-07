@@ -259,13 +259,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const videoModalBackdrop = document.querySelector(".video-modal-backdrop");
   const colorControlCards = document.querySelectorAll(".color-control-video-card");
 
-  function openVideoModal(src) {
+  function openVideoModal(embedUrl) {
     if (!videoModal || !videoModalPlayer) return;
-    const source = videoModalPlayer.querySelector("source");
-    if (source) {
-      source.src = src;
-      videoModalPlayer.load();
+    const params = ["autoplay=1", "rel=0", "playsinline=1"];
+    if (window.location.protocol === "http:" || window.location.protocol === "https:") {
+      params.push(`origin=${encodeURIComponent(window.location.origin)}`);
     }
+    const withAutoplay = embedUrl.includes("?")
+      ? `${embedUrl}&${params.join("&")}`
+      : `${embedUrl}?${params.join("&")}`;
+    videoModalPlayer.setAttribute("src", withAutoplay);
     videoModal.classList.add("is-open");
     videoModal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
@@ -273,7 +276,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function closeVideoModal() {
     if (!videoModal || !videoModalPlayer) return;
-    videoModalPlayer.pause();
+    videoModalPlayer.setAttribute("src", "");
     videoModal.classList.remove("is-open");
     videoModal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
@@ -291,8 +294,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   colorControlCards.forEach((card) => {
     card.addEventListener("click", () => {
-      const src = card.getAttribute("data-video-src");
-      if (src) openVideoModal(src);
+      const embedUrl = card.getAttribute("data-video-embed");
+      if (embedUrl) openVideoModal(embedUrl);
     });
     card.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
