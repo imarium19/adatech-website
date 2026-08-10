@@ -5,6 +5,3 @@ desktop.ini
 .idea/
 *.log
 assets/videos/
-
-# Event album photos (keep locally; upload separately when deploying)
-assets/events/
