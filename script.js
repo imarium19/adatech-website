@@ -436,6 +436,65 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  const trainingForm = document.getElementById("training-form");
+  const trainingStatusEl = document.getElementById("training-form-status");
+
+  if (trainingForm) {
+    trainingForm.addEventListener("submit", async event => {
+      event.preventDefault();
+
+      if (trainingStatusEl) {
+        trainingStatusEl.textContent = "";
+        trainingStatusEl.classList.remove("form-status--success", "form-status--error");
+      }
+
+      const formData = new FormData(trainingForm);
+      const name = (formData.get("name") || "").toString().trim();
+      const email = (formData.get("email") || "").toString().trim();
+      const phone = (formData.get("phone") || "").toString().trim();
+
+      if (!name || !email || !phone) {
+        if (trainingStatusEl) {
+          trainingStatusEl.textContent = "Please fill in all required fields.";
+          trainingStatusEl.classList.add("form-status--error");
+        }
+        return;
+      }
+
+      const payload = {
+        name,
+        email,
+        company: "G7+ Expert Training",
+        message: `Phone: ${phone}. Karachi & Lahore, April 2027.`
+      };
+
+      try {
+        const response = await fetch(ENDPOINT_URL, {
+          method: "POST",
+          body: JSON.stringify(payload)
+        });
+
+        if (!response || !response.ok) {
+          throw new Error("Request failed");
+        }
+
+        trainingForm.reset();
+
+        if (trainingStatusEl) {
+          trainingStatusEl.textContent = "Thank you. Your registration has been received.";
+          trainingStatusEl.classList.add("form-status--success");
+        }
+      } catch (error) {
+        console.error(error);
+        if (trainingStatusEl) {
+          trainingStatusEl.textContent =
+            "Sorry, something went wrong. Please try again in a moment.";
+          trainingStatusEl.classList.add("form-status--error");
+        }
+      }
+    });
+  }
+
   // Production Workflow Solutions: hover image swap, click dropdown
   const workflowBlocks = document.querySelectorAll(".workflow-block");
   workflowBlocks.forEach((block) => {
